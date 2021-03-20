@@ -1,0 +1,38 @@
+#include<stdio.h>
+
+/*
+分析：
+1.做题的第一步就是把题读懂，这道题的意思就是输入一堆信息，然后进行查找即可。
+2.考生的信息 使用结构体比较方便，一个一个定义太过繁琐不建议使用。
+代码如下：
+*/
+
+struct Stu
+{
+  char id[100];
+  int ji,kao;
+};
+//使用结构体定义学生的  id 准考证号  ji 试机座位号  kao考试座位号
+
+int main()
+{
+    struct Stu s[1001];
+    int n;
+    scanf("%d",&n);
+    for(int i=0;i<n;i++)
+    {
+        scanf("%s %d %d",s[i].id,&s[i].ji,&s[i].kao);//录入信息
+    }
+    int m,num;
+    scanf("%d",&m);//查询人数及试机座号码
+    for(int i=0;i<m;i++)
+    {
+        scanf("%d",&num);
+        for(int j=0;j<n;j++)
+        {
+            if(num==s[j].ji)
+                printf("%s %d\n",s[j].id,s[j].kao);
+        }
+    }
+    return 0;
+}
