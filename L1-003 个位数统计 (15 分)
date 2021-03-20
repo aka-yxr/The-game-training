@@ -1,0 +1,30 @@
+#include<stdio.h>
+#include<string.h>
+/*
+分析：
+1.1000位的数字，用int 或者double 类型都不合适，用char合适最佳。
+2.统计每个数字出现的次数，很简单。
+
+*/
+
+int main()
+{
+    char num[1001]={0};//数字
+    int n[10]={0};//统计不同数字出现的次数
+    gets(num);
+    int len=strlen(num);
+    
+    for(int i=0;i<len;i++)
+    {
+        int tmp=num[i]-'0';
+        n[tmp]++;
+        //用数组统计比较简单
+    }
+    for(int i=0;i<10;i++)
+    {
+        if(n[i])
+            printf("%d:%d\n",i,n[i]);
+    }
+    
+    return 0;
+}
