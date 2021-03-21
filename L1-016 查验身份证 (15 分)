@@ -1,0 +1,47 @@
+#include<stdio.h>
+#include<ctype.h>
+
+/*
+分析：
+1.输入输出就不多说了，要判断每一个输入的身份证是否正确，前17位只能是纯数字。
+2.然后是计算前17位的加权和并对11取模。
+3.然后和效验码一致才对。
+4.有点复杂，需要多多注意细节。
+5.另，用gets会有运行时错误，换成scanf的时候要考虑缓存区有‘\n’
+代码如下：
+
+*/
+//1 0 X 9 8 7 6 5 4 3 2
+int main()
+{
+    int n;
+    int weight[17]={7,9,10,5,8,4,2,1,6,3,7,9,10,5,8,4,2};//权重
+    char M[]={'1','0','X','9','8','7','6','5','4','3','2'};//效验码
+    char id[18];
+    scanf("%d",&n);
+    
+    int test=0;
+    for(int i=0;i<n;i++)
+    {
+        //getchar();
+        scanf("%s ",id);
+        int sum=0;
+        int flag=0;
+        for(int j=0;j<17;j++)
+        {
+            sum+=(id[j]-'0')* weight[j];//计算每一位的权重和
+            if(!isdigit(id[j]))//不全为数字
+                flag=1;
+        }
+        int x=sum%11;
+        if(M[x]!=id[17]||flag)//效验码不正确or不全为数字
+        {
+            test++;
+            printf("%s\n",id);
+        }
+    }
+        if(!test)//身份证全部合理
+            printf("All passed\n");
+    
+    
+}
