@@ -1,0 +1,54 @@
+#include<stdio.h>
+#include <math.h>
+
+/*
+分析：
+1.第一次写的时候没用理解好题目意思，导致就过了一个测试点。后来慢慢 “悟”了。
+2.当输入的n为质数的时候，输出的样式应该是第一行为1，第二行为n本身。
+3.有难度的在于求连续的因子，start用来记忆连续因子的第一位，
+
+
+*/
+
+
+int main()
+{
+    int n;
+    scanf("%d",&n);
+    int max=0,count=0,start=0;
+    int i=0,j=0,k=0;
+    for(i=2;i<sqrt(n)+1;i++)
+    {
+        k=n;
+        count=0;
+        j=i;  
+        while(k%j==0)//找连续的因子
+        {
+            k=k/j;
+            j+=1;
+            count+=1;
+        }
+        
+        if(count>max)
+        {
+            max=count;
+            start=i;
+        }
+    }
+    
+    if(max==0)
+        printf("1\n%d\n",n);
+    
+    else
+    {
+        printf("%d\n",max);
+        for(i=start;i<(start+max);i++)
+        {
+            printf("%d",i);
+            if(i!=(start+max-1))
+                printf("*");
+        }
+         printf("\n");
+    }
+   
+}
