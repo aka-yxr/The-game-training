@@ -1,0 +1,84 @@
+#include<stdio.h>
+/*
+分析：
+1.能正确写出来，感觉还挺不容易的。之前的思考一直都有缺漏，这次没有了。
+2.我大致把结果分成了三种情况，一是分子or分母为零，二是有整数部分（有分数部分and无分数部分，即约分成了整数），三是无整数部分。
+3.先是求出，分子的和and分母的和，再去判断。
+代码如下：
+
+*/
+
+//求最大公约数de函数
+int gcd(int a,int b)
+{
+    if(b==0)
+        return a;
+    else
+        return gcd(b,a%b);
+}
+
+int main()
+{
+    int n;
+    scanf("%d",&n);
+    int zi,mu;
+    int zisum=0,musum=0;//分子和and分母和
+    scanf("%d/%d",&zisum,&musum);
+    for(int i=1;i<n;i++)
+    {
+        scanf("%d/%d",&zi,&mu);
+        zisum=zisum*mu+zi*musum;
+        musum=mu*musum;
+    }
+       
+    //判断正负，若为负，则打印一个负号，并让为负的部分变成正的，方便下面的运算。
+    int flag=1;
+    if(zisum<0&&musum<0)
+        flag=1;
+    else if(zisum<0&&musum>0)
+    {
+        flag=0;
+        zisum=-zisum;
+    }
+    else if(zisum>0&&musum<0)
+    {
+        flag=0;
+        musum=-musum;
+    }
+    if(flag==0)
+        printf("-");
+    
+    //判断分子，分母是否有为零的情况。
+    if(zisum==0||musum==0)
+    {
+        printf("0\n");
+        return 0;
+    }
+    //有整数部分
+    if(zisum/musum>0)
+    {
+        int zheng=zisum/musum;
+        
+        int den=gcd(zisum,musum);//最大公约数
+        zisum=zisum/den-(zisum/musum*musum/den);
+        musum=musum/den;
+        if(zisum==0)
+            printf("%d\n",zheng);
+        else
+        {
+            printf("%d ",zheng);
+            printf("%d/%d\n",zisum,musum);
+        }
+        //printf("%d/%d",zisum/den-(zisum/musum*musum/den),musum/den);
+    }
+    
+    //无整数部分
+    else
+    {
+        int den=gcd(zisum,musum);
+        printf("%d/%d",zisum/den-(zisum/musum*musum/den),musum/den);
+    }
+    
+        
+    return 0;
+}
