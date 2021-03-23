@@ -1,0 +1,35 @@
+#include<stdio.h>
+#include<string.h>
+
+/*
+分析：
+1.有关计算的题都是比较简单的，这题也一样。
+2.有一点需要注意的是当是负数的时候，计算的时候字符数应该-1；
+代码如下：
+
+*/
+
+int main()
+{
+    char num[52];
+    gets(num);
+    double fu=1,dou=1;//用来记 是不是 负数、偶数； 
+    int two=0;//用来记2的个数
+    if(num[0]=='-')
+        fu=1.5;
+    int len=strlen(num);
+    for(int i=0;i<len;i++)
+    {
+        if(num[i]=='2')
+            two++;
+    }
+    if((num[len-1]-'0')%2==0)
+        dou=2;
+    double sum=fu*dou*two;
+    if(fu==1.5)
+        printf("%.2f",sum*100/(len-1));
+    else
+        printf("%.2f",sum*100/len);
+    printf("%\n");
+    
+}
