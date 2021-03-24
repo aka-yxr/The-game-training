@@ -1,0 +1,40 @@
+#include<stdio.h>
+
+/*
+分析：
+1.题目不难但是要细心，变量比较多。
+代码如下：
+
+*/
+
+int main()
+{
+    int winej,winey;
+    int callj=0,cally=0;
+    int padj=0,pady=0;
+    int countj=0,county=0;
+    scanf("%d%d",&winej,&winey);
+    int n;
+    scanf("%d",&n);
+    for(int i=0;i<n;i++)
+    {
+        scanf("%d%d%d%d",&callj,&padj,&cally,&pady);
+        if((padj==callj+cally)&&(pady!=callj+cally))
+            countj++;
+        if((pady==callj+cally)&&(padj!=callj+cally))
+            county++;
+        if(countj>winej)
+        {
+            printf("A\n");
+            printf("%d\n",county);
+            break;
+        }
+        if(county>winey)
+        {
+            printf("B\n");
+            printf("%d\n",countj);
+            break;
+        }
+    }
+    
+}
