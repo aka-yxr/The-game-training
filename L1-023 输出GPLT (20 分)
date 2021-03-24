@@ -1,0 +1,46 @@
+#include<stdio.h>
+
+int main()
+{
+    char str[10001]={0};
+    gets(str);
+    int len=strlen(str);
+    int gn=0,pn=0,ln=0,tn=0;
+    for(int i=0;i<len;i++)
+    {
+        if(str[i]=='G'||str[i]=='g')
+            gn++;
+        if(str[i]=='P'||str[i]=='p')
+            pn++;
+        if(str[i]=='L'||str[i]=='l')
+            ln++;
+        if(str[i]=='T'||str[i]=='t')
+            tn++;
+    }
+    
+    while(gn+pn+ln+tn>0)
+    {
+        if(gn>0)
+        {
+            printf("G");
+            gn--;
+        }
+        if(pn>0)
+        {
+            printf("P");
+            pn--;
+        }
+        if(ln>0)
+        {
+            printf("L");
+            ln--;
+        }
+        if(tn>0)
+        {
+            printf("T");
+            tn--;
+        }
+    }
+    
+    
+}
