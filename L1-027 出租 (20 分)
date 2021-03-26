@@ -1,0 +1,68 @@
+#include<stdio.h>
+
+/*
+分析：
+1.第一次写的时候没用读懂（有点憨）；
+2.后来在写的时候明白了，index数组其实就是电话号的 “代码”，把arr数组下标为index的翻译到index数组里就算电话。
+3.这样明白以后就简单了。
+
+*/
+
+int main()
+{
+    int arr[10]={0};
+    int num[10]={0};
+    int index[12]={0};
+    char tele;
+    for(int i=0;i<11;i++)
+    {
+        tele=getchar();
+        int tmp=tele-'0';
+        arr[tmp]++;
+        index[i]=tmp;
+    }
+    
+    int sub=0;
+    for(int i=9;i>=0;i--)
+    {
+        if(arr[i]!=0)
+        {
+            num[sub]=i;
+            sub++;
+        }
+    }
+    
+    printf("int[] arr = new int[]{");
+    for(int i=0;i<sub;i++)
+    {
+        printf("%d",num[i]);
+        if(i<sub-1)
+            printf(",");
+    }
+    printf("};\n");
+    
+    printf("int[] index = new int[]{");
+    int new[12]={0};
+    int newindex=0;
+    for(int i=0;i<11;i++)
+    {
+        for(int j=0;j<sub;j++)
+        {
+            if(index[i]==num[j])
+            {
+                new[newindex]=j;
+                newindex++;
+            }
+        }
+    }
+    for(int i=0;i<11;i++)
+    {
+        printf("%d",new[i]);
+        if(i<10)
+            printf(",");
+    }
+    printf("};\n");
+    
+    
+    return 0;
+}
