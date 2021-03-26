@@ -1,0 +1,45 @@
+#include<stdio.h>
+
+/*
+分析：
+1.使用结构体的话会比较简单，定义3个变量，性别，名字和一个标记变量；
+2.标记的作用是在寻找的过程中把已配对的标记一下；
+代码如下：
+
+*/
+
+struct Stu
+{
+    int sex,flag;
+    char name[9];
+};
+
+int main()
+{
+    struct Stu s[51];
+    int n;
+    scanf("%d",&n);
+    //录入信息
+    for(int i=0;i<n;i++)
+    {
+        scanf("%d %s ",&s[i].sex,s[i].name);
+        s[i].flag=0;
+    }
+    
+    //配对
+    for(int i=0;i<n/2;i++)
+    {
+        for(int j=n-1;j>=n/2;j--)
+        {
+            if(s[i].sex!=s[j].sex&&s[i].flag==0&&s[j].flag==0)
+            {
+                printf("%s %s\n",s[i].name,s[j].name);
+                s[i].flag=1;
+                s[j].flag=1;
+                
+                break;
+            }
+        }
+    }
+    
+}
