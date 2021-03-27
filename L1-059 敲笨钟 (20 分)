@@ -1,0 +1,52 @@
+#include<stdio.h>
+#include<string.h>
+
+/*
+分析：
+1.题目关键就算判断 ','和'.'前面是不是ong，是的话进行下一步操作，不是就输出Skipped；
+2.如果满足条件，就要把最好三个单词变成 qiao ben zhong.，这个可以找到倒数第三个空格，然后之前的原样输出，后面修改为
+   qiao ben zhong.
+代码如下：
+
+
+*/
+
+int main()
+{
+    char str[101];
+    int n;
+    scanf("%d",&n);
+    getchar();
+    int dot=0,comma=0;
+    for(int i=0;i<n;i++)
+    {
+        gets(str);
+        int len=strlen(str);
+        dot=0;
+        comma=0;
+        for(int j=0;j<len;j++)
+        {
+            if(str[j]==','&&str[j-1]=='g'&&str[j-2]=='n'&&str[j-3]=='o')
+                comma=1;
+            if(str[j]=='.'&&str[j-1]=='g'&&str[j-2]=='n'&&str[j-3]=='o')
+                dot=1;
+        }
+        if(dot&&comma)
+        {
+            int space=0,k=0,x=0;
+            for(k=len-1;space!=3;k--)
+            {
+                if(str[k]==' ')
+                    space++;
+                x=k;
+            }
+            for(int l=0;l<k+1;l++)
+                printf("%c",str[l]);
+            printf(" qiao ben zhong.\n");
+         }
+        else
+            printf("Skipped\n");
+    }
+    
+    return 0;
+}
