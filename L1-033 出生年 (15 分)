@@ -1,0 +1,40 @@
+#include<stdio.h>
+#include<string.h>
+
+/*
+分析：
+1.个人感觉这题还是呦点难度的，当输入的年份为小于4位数的时候，需要在前面补0之类的操作，让人无从下手。
+2.后来想到数组，最多就4位数，定义一个数组用来放年份。再用一个0~9的数组查数字。
+代码如下：
+
+*/
+
+int main()
+{
+    
+    int year,n;
+    int sum=0,num[4]={0},all[10]={0};
+    scanf("%d%d",&year,&n);
+    int first=year;
+    while(1)
+    {
+        num[0]=year/1000;
+        num[1]=year/100%10;
+        num[2]=year/10%10;
+        num[3]=year%10;
+        for(int i=0;i<4;i++)
+            all[num[i]]++;
+        for(int i=0;i<10;i++)
+            if(all[i]>=1)
+                sum++;
+        if(sum==n)
+            break;
+        memset(all,0,10*sizeof(int));//初始化数组
+        year++;
+        sum=0;
+    }
+    printf("%d %04d",year-first,year);
+    
+    return 0;
+}
+ 
