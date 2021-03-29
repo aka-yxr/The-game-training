@@ -1,0 +1,31 @@
+#include<stdio.h>
+#include<string.h>
+
+int main()
+{
+    char ch[11];
+    int two=0,eleven=0;
+    int count=1;
+    for(count;;count++)
+    {
+        gets(ch);
+        if(ch[0]=='.')
+           break;
+        if(count==2)
+        {
+            printf("%s ",ch);
+            two=1;
+        }
+        if(count==14)
+        {
+            printf("and %s are inviting you to dinner...\n",ch);
+            eleven=1;
+        }
+    }
+    if(two==1&&eleven==0)
+        printf("is the only one for you...\n");
+    if(two==0&&eleven==0)
+        printf("Momo... No one is for you ...\n");
+    
+    return 0;
+}
