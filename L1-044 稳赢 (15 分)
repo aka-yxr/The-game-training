@@ -1,0 +1,32 @@
+#include<stdio.h>
+#include<string.h>
+int main()
+{
+    int k;
+    scanf("%d", &k);
+    getchar();
+    int count=0;
+    for (int i=0;;i++)
+    {
+        char arr[15];
+        gets(arr);
+        if (strcmp(arr,"End")==0)
+            break;
+        count++;
+        if (count==k+1)
+        {
+            count-=k+1;
+            puts(arr);
+        }
+        else
+        {
+            if (strcmp(arr,"JianDao")==0)
+                puts("ChuiZi");
+            else if (strcmp(arr,"ChuiZi")==0)
+                puts("Bu");
+            else
+                puts("JianDao");
+        }
+        //count++;
+    }
+}
