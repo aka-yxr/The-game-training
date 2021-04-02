@@ -1,0 +1,40 @@
+#include<stdio.h>
+
+/*
+分析:
+1.第一次写的时候有两个测试点是运行超时。
+2.实在是没办法的时候，我手动自己算了一下111111111111111除31；
+3.我发现，可以用手动除法来完成。
+如：111/31得3余18；下一位除就是181/31
+..就这样就能把s和n求出来了
+    
+
+*/
+
+
+int main()
+{
+    int x;
+    scanf("%d",&x);
+    int num=1;
+    int count=1;
+    while(num<x)
+    {
+        num=num*10+1;
+        count++;
+    }
+    while(1)
+    {
+        printf("%d",num/x);
+        if(num%x==0)
+            break;
+        else
+        {
+            num=(num%x)*10+1;
+            count++;
+        }
+    }
+   
+    printf(" %d",count);
+    
+}
