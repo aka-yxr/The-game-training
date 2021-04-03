@@ -1,0 +1,33 @@
+#include<stdio.h>
+#include<math.h>
+/*
+分析：
+1.这种题一般都有巧妙的方法来解决。
+2.这道题可以考虑10进制和26进制的问题。
+代码如下：
+
+
+*/
+
+
+int main()
+{
+    int L,N;
+    scanf("%d%d",&L,&N);
+    int all=pow(26,L)-N;
+    int num[10]={0};
+    int i=0;
+    while(L--)
+    {
+        num[i++]=all%26;
+        all/=26;
+    }
+    for(int j=i-1;j>=0;j--)
+    {
+        char ch=num[j]+'a';
+        printf("%c",ch);
+    }
+    printf("\n");
+    
+    return 0;
+}
