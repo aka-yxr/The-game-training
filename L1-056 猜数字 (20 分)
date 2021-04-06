@@ -1,0 +1,43 @@
+#include<stdio.h>
+#include<math.h>
+
+struct People
+{
+    char name[9];
+    int num;
+    int val;
+};
+
+int main()
+{
+    int n;
+    scanf("%d",&n);
+    struct People s[n];
+    int sum=0;
+    for(int i=0;i<n;i++)
+    {
+        getchar();
+        scanf("%s %d",s[i].name,&s[i].num);
+        s[i].val=0;
+        sum+=s[i].num;
+    }
+    sum/=(2*n);
+    printf("%d ",sum);
+    int win=0;
+    for(int i=0;i<n;i++)
+    {
+        s[i].val=abs(s[i].num-sum);
+    }
+    
+    int min=s[0].val;
+    for(int i=1;i<n;i++)
+    {
+        if(s[i].val<min)
+        {
+            min=s[i].val;
+            win=i;
+        }
+    }
+    printf("%s",s[win].name);
+    
+}
