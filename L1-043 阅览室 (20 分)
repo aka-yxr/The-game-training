@@ -1,0 +1,53 @@
+#include <stdio.h>
+
+/*
+分析：
+1.经过有几个类似关键想法的问题，对于在数组中需要重复使用或者去重之类的问题，可以将数组赋值成-1；
+2.之前没有看懂，原来0是一天的结束。
+3.如果用单个字符的输入，可能会造成错误，可能会吃掉后面的数字。
+4.数组的灵活使用，很关键。
+代码如下：
+
+*/
+
+int main()
+{
+    int n;
+    scanf("%d",&n);
+    int id,hh,mm;
+    char ch[5];
+    int time=0,books=0;
+    int b[1001];
+    int i=0,j=0;
+    for(i=0;i<1005;i++)
+        b[i]=-1;
+    for(j=0;j<n;j++)
+    {
+        while(1)
+        {
+            scanf("%d %s %d:%d",&id,ch,&hh,&mm);
+            if(id==0)
+            {
+                if(books!=0)
+                    printf("%d %.0f\n",books,time*1.0/books);
+                else
+                    printf("0 0\n");
+                time=0;
+                books=0;
+                break;
+            }
+            else
+            {
+                if(ch[0]=='S')
+                    b[id]=hh*60+mm;
+                else if(ch[0]=='E'&&b[id]!=-1)
+                {
+                    books++;
+                    time+=hh*60+mm-b[id];
+                    b[id]=-1;
+                }
+            }
+        }
+    }
+    return 0;
+}
