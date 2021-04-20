@@ -1,0 +1,52 @@
+#include<stdio.h>
+
+struct mooncake
+{
+    double store;//库存
+    double sell;//总价
+    double price;//单价
+};
+int cmp(const void*a,const void*b)
+{
+    struct mooncake*x1=(struct mooncake*)a;
+    struct mooncake*x2=(struct mooncake*)b;
+    double num1=x2->price;
+    double num2=x1->price;
+    return num1>num2?1:-1;
+}
+
+int main()
+{
+    struct mooncake cake[1010];
+    int n,D;
+    scanf("%d%d",&n,&D);
+    for(int i=0;i<n;i++)
+        scanf("%lf",&cake[i].store);
+    for(int i=0;i<n;i++)
+    {
+        scanf("%lf",&cake[i].sell);
+        cake[i].price=cake[i].sell/cake[i].store;//计算单价
+    }
+    
+    qsort(cake,n,sizeof(cake[0]),cmp);
+
+    double ans=0;//收益
+    //让单价最高的先买，如果库存够多，只用买单价最高的月饼即可，
+    //如果库存不够，那就买剩下里面库存最高的。
+    for(int i=0;i<n;i++)
+    {
+        if(cake[i].store<=D)
+        {
+            D-=cake[i].store;
+            ans+=cake[i].sell;
+        }
+        else
+        {
+            ans+=cake[i].price*D;
+            break;
+        }
+    }
+    
+    printf("%.2f\n",ans);
+    return 0;
+}
