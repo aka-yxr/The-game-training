@@ -1,0 +1,62 @@
+#include<stdio.h>
+
+typedef struct node{
+     double money;
+     int count;
+     int id;
+}Node;
+
+int cmp(const void* a,const void* b)
+{
+    struct node* A=(struct node*)a;
+    struct node* B=(struct node*)b;
+    
+    if(A->money!=B->money)
+        return A->money>B->money?-1:1;
+    
+    if(A->count!=B->count)
+        return A->count>B->count ?1:-1;
+    
+    if(A->id!=B->id)
+        return A->id>B->id ?1:-1;
+}
+int main()
+{
+    int n,k;
+    Node num[10005];
+    scanf("%d",&n);
+    
+    for(int i=0;i<=n;i++)
+    {
+        num[i].count=0;
+        num[i].id=i;
+        num[i].money=0;
+    }
+
+    for(int i=1;i<=n;i++)
+    {
+        scanf("%d",&k);
+        int id;
+        double sum=0,less=0;
+        for(int j=1;j<=k;j++)
+        {
+            scanf("%d %lf",&id,&sum);
+            num[id].id=id;
+            num[id].money+=(sum/100.0);
+            num[id].count++;
+            less+=sum;
+        }
+        num[i].money-=less/100.0;
+     }
+    
+    qsort(num,n+1,sizeof(num[1]),cmp);
+    
+    for(int i=0;i<=n;i++)
+    {
+        if(num[i].id==0)
+            continue;
+        printf("%d %.2f\n",num[i].id,num[i].money);
+    }
+    
+    return 0;
+}
