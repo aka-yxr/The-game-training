@@ -1,0 +1,36 @@
+#include<stdio.h>
+
+int main()
+{
+    int n,m;
+    scanf("%d %d",&n,&m);
+    int matrix[n+1][m+1];
+    int i,j;
+    for(i=0;i<n;i++)
+    {
+        for(j=0;j<m;j++)
+            scanf("%d ",&matrix[i][j]);
+    }
+    int h,w;
+    scanf("%d%d",&h,&w);
+    int x,y;
+    int flag=0;
+    for(x=0;(x+h-1)<n;x++)
+    {
+        
+        for(y=0;(y+w-1)<m;y++)
+        {
+            
+            if(matrix[x][y]==matrix[x+h-1][y]&&matrix[x][y]==matrix[x][y-1+w]&&matrix[x][y]==matrix[x-1+h][y-1+w])
+            {
+                flag=1;
+            }
+        }
+    }
+    if(flag)
+        printf("YES\n");
+    else
+        printf("NO\n");
+    
+    return 0;
+}
